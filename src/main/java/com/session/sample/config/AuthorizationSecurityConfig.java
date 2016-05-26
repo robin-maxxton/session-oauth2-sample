@@ -8,7 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration()
+import com.session.sample.oauth.AuthenticationEntryPoint;
+import com.session.sample.oauth.AuthenticationSuccessHandler;
+
+/**
+ * Spring Web Security configuration
+ */
+@Configuration(value = "authorizationSecurityConfig")
 @Order(-20)
 public class AuthorizationSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -17,7 +23,8 @@ public class AuthorizationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.formLogin().loginPage("/login").permitAll().and().requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access").and().authorizeRequests().anyRequest().authenticated();
+    http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint("/login")).and().formLogin().successHandler(new AuthenticationSuccessHandler()).and().requestMatchers()
+        .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access").and().authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated();
   }
 
   @Override

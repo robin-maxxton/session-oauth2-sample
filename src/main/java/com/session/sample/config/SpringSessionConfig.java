@@ -2,22 +2,24 @@ package com.session.sample.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.session.web.http.CookieHttpSessionStrategy;
 
 /**
- * Created by Hermans.r on 5/25/2016.
+ * Spring Session Configuration
  */
 @Configuration
 public class SpringSessionConfig {
 
   @Bean
-  protected CookieHttpSessionStrategy cookieHttpSessionStrategy(){
+  protected CookieHttpSessionStrategy cookieHttpSessionStrategy() {
     CookieHttpSessionStrategy strategy = new CookieHttpSessionStrategy();
-    strategy.setSessionAliasParamName("concern");
+    strategy.setSessionAliasParamName("custom");
     return strategy;
   }
 
   @Bean
-  public JedisConnectionFactory connectionFactory(){
+  public JedisConnectionFactory connectionFactory() {
     JedisConnectionFactory cf = new JedisConnectionFactory();
     cf.setHostName("localhost");
     cf.setPort(6379);
