@@ -19,7 +19,7 @@ public class LoginController {
       request.getSession().setAttribute("custom", model.getCustom());
       return "login";
     }
-    throw new InvalidRequestException("Invalid values for query parameters 'redirect' or 'concern'");
+    throw new InvalidRequestException("Invalid values for query parameters 'redirect' or 'custom'");
   }
 
   @RequestMapping(value = "/oauth/confirm_access")

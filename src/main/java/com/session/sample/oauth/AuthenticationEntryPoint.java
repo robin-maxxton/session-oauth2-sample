@@ -21,6 +21,6 @@ public class AuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
   protected String determineUrlToUseForThisRequest(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
     String redirectParamValue = UrlUtils.buildRequestUrl(request);
     String redirect = super.determineUrlToUseForThisRequest(request, response, exception);
-    return UriComponentsBuilder.fromPath(redirect).queryParam("redirect", redirectParamValue).queryParam("custom", request.getParameter("custom")).toUriString();
+    return UriComponentsBuilder.fromPath(redirect).queryParam("redirect", redirectParamValue).toUriString();
   }
 }

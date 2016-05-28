@@ -41,7 +41,8 @@ dependencies {
   compile("org.springframework.security.oauth:spring-security-oauth2:${spring_security_version}")
   compile("org.springframework.security:spring-security-jwt:${spring_jwt_version}")
 
-  compile("org.springframework.session:spring-session-data-redis:${spring_session_version}")
+  compile("org.springframework.boot:spring-boot-starter-redis:${spring_boot_version}")
+  compile("org.springframework.session:spring-session:${spring_session_version}")
 }
 
 task wrapper(type: Wrapper) {

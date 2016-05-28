@@ -23,8 +23,9 @@ public class AuthorizationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint("/login")).and().formLogin().successHandler(new AuthenticationSuccessHandler()).and().requestMatchers()
-        .antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access").and().authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated();
+    http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint("/login")).and().sessionManagement().enableSessionUrlRewriting(true).and().formLogin()
+        .successHandler(new AuthenticationSuccessHandler()).and().requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access").and().authorizeRequests().antMatchers("/login")
+        .permitAll().anyRequest().authenticated();
   }
 
   @Override

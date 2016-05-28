@@ -1,24 +1,20 @@
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
-	<div class="container">
-		<h2>Please Confirm</h2>
+<div class="container">
+	<h2>Please Confirm</h2>
 
-		<p>
-			Do you authorize "${authorizationRequest.clientId}" at "${authorizationRequest.redirectUri}" to access your protected resources
-			with scope ${authorizationRequest.scope?join(", ")}.
-		</p>
-		<form id="confirmationForm" name="confirmationForm"
-			action="../oauth/authorize" method="post">
-			<input name="user_oauth_approval" value="true" type="hidden" />
-			<input type="hidden" id="csrf_token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-			<button class="btn btn-primary" type="submit">Approve</button>
-		</form>
-		<form id="denyForm" name="confirmationForm"
-			action="../oauth/authorize" method="post">
-			<input name="user_oauth_approval" value="false" type="hidden" />
-			<input type="hidden" id="csrf_token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-			<button class="btn btn-primary" type="submit">Deny</button>
-		</form>
-	</div>
+	<p>
+		Do you authorize <span th:text="${session.authorizationRequest.clientId}" /> at <span th:text="${session.authorizationRequest.redirectUri}" /> to access your protected resources
+		with scope <span th:text="${session.authorizationRequest.scope}" />.
+	</p>
+	<form id="confirmationForm" name="confirmationForm" th:action="@{/oauth/authorize}" method="post">
+		<input name="user_oauth_approval" value="true" type="hidden" />
+		<button class="btn btn-primary" type="submit">Approve</button>
+	</form>
+	<form id="denyForm" name="confirmationForm" th:action="@{/oauth/authorize}" method="post">
+		<input name="user_oauth_approval" value="false" type="hidden" />
+		<button class="btn btn-primary" type="submit">Deny</button>
+	</form>
+</div>
 </body>
 </html>
